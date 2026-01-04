@@ -25,7 +25,11 @@ public:
     size_t capacity();
 
     bool empty();
+
     void push_back(const T& value);
+    T pop_back();
+    void resize();
+
     void print();
 
 

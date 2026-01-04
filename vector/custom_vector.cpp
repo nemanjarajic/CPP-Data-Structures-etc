@@ -53,6 +53,48 @@ void CustomVector<T>::push_back(const T& value){
 }
 
 template<typename T>
+T CustomVector<T>::pop_back(){
+    if(empty()){
+        throw std::out_of_range("Vector is empty");
+    }
+
+    T index_val = data[_size - 1];
+    data[_size - 1].~T();
+    --_size;
+
+    return index_val;
+}
+
+template <typename T>
+void CustomVector<T>::resize(){
+    T* new_data = new T[_size];
+
+    for(size_t i = 0; i < _size; i++){
+        new_data[i] = data[i];
+    }
+
+    delete[] data;
+
+    data = new_data;
+    _capacity = _size;
+
+}
+
+template <typename T>
+void CustomVector<T>::resize(size_t new_capacity){
+    T* new_data = new T[new_capacity];
+
+    for(size_t i = 0; i < _size; i++){
+        new_data[i] = data[i];
+    }
+
+    delete[] data;
+
+    data = new_data;
+    _capacity = new_capacity;
+}
+
+template<typename T>
 T& CustomVector<T>::operator[](size_t index){
     if(index >= _size){
         throw std::out_of_range("out of bounds");
